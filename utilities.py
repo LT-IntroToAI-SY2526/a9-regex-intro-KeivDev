@@ -8,18 +8,10 @@ from typing import List, Match
 
 
 def get_page_html(title: str) -> str:
-    """Gets html of a wikipedia page
-
-    Args:
-        title - title of the page
-
-    Returns:
-        html of the page
-    """
-    reponse = requests.get(
-        "https://en.wikipedia.org/w/api.php"
+    response = requests.get(
+        "https://en.wikipedia.org/w/api.php",
         params={
-            "action":"parse",
+            "action": "parse",
             "page": title,
             "prop": "text",
             "format": "json",
@@ -28,8 +20,6 @@ def get_page_html(title: str) -> str:
     )
     data = response.json()
     return data["parse"]["text"]["*"]
-    #return WikipediaPage(title).html()
-
 
 def get_first_infobox_text(html: str) -> str:
     """Gets first infobox html from a Wikipedia page (summary box)
